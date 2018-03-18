@@ -3,14 +3,9 @@ public class Jogador {
 	private int pontuacao;
 	private int id;
 	
-	public Jogador() {
-		id=1;
-		pontuacao = 0;
-	}
-	
 	public Jogador(int id_) {
 		id = id_;
-		pontuacao =0;
+		pontuacao = 0;
 	}
 	
 	public int getId() {

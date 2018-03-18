@@ -61,4 +61,14 @@ public class Pergunta {
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
+	
+	public void imprimir() {
+		System.out.println(enunciado);
+		for(int i = 0; i < 4; i++) {
+			System.out.println(alternativas[i]);
+		}
+		System.out.print("RESPOSTA: ");
+		System.out.println(alternativas[respostaCerta]);
+		System.out.println("-------------------------------");
+	}
 }

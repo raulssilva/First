@@ -4,8 +4,8 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		Montador m = new Montador();
-		//String path = "Perguntas/pergunta1.txt";
-        //ManipuladorArquivo.leitor(path);
+//		String path = "Perguntas/pergunta2.txt";
+//        ManipuladorArquivo.leitor(path);
 
 	}
 

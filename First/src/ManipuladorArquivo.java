@@ -8,18 +8,30 @@ import java.util.Scanner;
  
 public class ManipuladorArquivo {
  
-    public static void leitor(String path) throws IOException {
+    public static Pergunta leitor(String path) throws IOException {
         BufferedReader buffRead = new BufferedReader(new FileReader(path));
         String linha = "";
-        while (true) {
+        Pergunta p = new Pergunta();
+        for(int i = 0; i < 6; i++) {
+        	linha = buffRead.readLine();
             if (linha != null) {
-                System.out.println(linha);
- 
+            	switch (i) {
+				case 0:
+					p.setEnunciado(linha);
+					break;
+				case 5:
+					p.setRespostaCerta(Integer.parseInt(linha));
+					break;
+				default:
+					p.addAlternativa(linha, i-1);
+					break;
+				}
             } else
                 break;
-            linha = buffRead.readLine();
+            
         }
         buffRead.close();
+        return p;
     }
  
     public static void escritor(String path) throws IOException {
