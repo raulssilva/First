@@ -1,6 +1,0 @@
-Quantos fantasmas existem no jogo "Pac-Man"?
-3
-4
-1
-2
-1

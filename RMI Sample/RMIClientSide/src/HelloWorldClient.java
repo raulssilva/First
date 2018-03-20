@@ -5,7 +5,7 @@ public class HelloWorldClient {
 	public static void main(String[] args) {
 		HelloWorld hello;
 		try {
-			hello = (HelloWorld) Naming.lookup("rmi://localhost/ABC");
+			hello = (HelloWorld) Naming.lookup("rmi://localhost:9090/HelloWorldImpl");
 			String request = hello.hello();
 			System.out.println(request);
 		} catch (Exception e) {
