@@ -9,25 +9,25 @@ public class Main {
 		Scanner ler = new Scanner(System.in);
 		PerguntaInterf pergunta = null;
 		try {
-			String ip = "10.51.65.194";
-			int port = 8080;
+			String ip = "192.168.43.102";
+			int port = 1099;
 			String name = "first";
 			String address = "rmi://" + ip + ":" + port + "/" + name;
-			Registry registry = LocateRegistry.getRegistry(ip, port);
-			pergunta = (PerguntaInterf) registry.lookup(address);
-			//pergunta = (PerguntaInterf) Naming.lookup(address);
+
+			pergunta = (PerguntaInterf) Naming.lookup(address);
 			String enunciado = pergunta.getEnunciado();
 			String[] alternativas = pergunta.getAlternativas();
 			System.out.println(enunciado);
+			
 			for(int i = 0; i < 4; i++) {
 				int j = i + 1;
 				System.out.println(j +"- "+ alternativas[i]);
 			}
+			
 			int n = ler.nextInt();
 			if(n-1 == pergunta.getRespostaCerta()) {
 				System.out.println("Acertou, mizera");
-			}
-			else {
+			} else {
 				System.out.println("Errou");
 			}
 		} catch (Exception e) {
