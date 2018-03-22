@@ -1,5 +1,7 @@
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.Scanner;
 public class Main {
 
@@ -7,7 +9,13 @@ public class Main {
 		Scanner ler = new Scanner(System.in);
 		PerguntaInterf pergunta = null;
 		try {
-			pergunta = (PerguntaInterf) Naming.lookup("rmi://localhost:9090/PerguntaInterf");
+			String ip = "10.51.65.194";
+			int port = 8080;
+			String name = "first";
+			String address = "rmi://" + ip + ":" + port + "/" + name;
+			Registry registry = LocateRegistry.getRegistry(ip, port);
+			pergunta = (PerguntaInterf) registry.lookup(address);
+			//pergunta = (PerguntaInterf) Naming.lookup(address);
 			String enunciado = pergunta.getEnunciado();
 			String[] alternativas = pergunta.getAlternativas();
 			System.out.println(enunciado);
