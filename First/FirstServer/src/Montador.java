@@ -27,7 +27,15 @@ public class Montador {
 		}
 	}
 	
-	public Pergunta getPerguntas(int x) {
+	public Pergunta[] getPerguntas() {
+		return perguntas;
+	}
+
+	public void setPerguntas(Pergunta[] perguntas) {
+		this.perguntas = perguntas;
+	}
+	
+	public Pergunta getPergunta(int x) {
 		return perguntas[x];
 	}
 }

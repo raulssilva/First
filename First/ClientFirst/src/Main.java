@@ -9,8 +9,8 @@ public class Main {
 		Scanner ler = new Scanner(System.in);
 		PerguntaInterf pergunta = null;
 		try {
-			String ip = "192.168.43.102";
-			int port = 1099;
+			String ip = "10.9.99.79";
+			int port = 8080;
 			String name = "first";
 			String address = "rmi://" + ip + ":" + port + "/" + name;
 
@@ -31,7 +31,7 @@ public class Main {
 				System.out.println("Errou");
 			}
 		} catch (Exception e) {
-			System.out.println("HelloClient exception: " + e);
+			System.out.println("FirstClient exception: " + e);
 		}
 	}
 }
