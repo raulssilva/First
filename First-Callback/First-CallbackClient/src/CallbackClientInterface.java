@@ -9,4 +9,7 @@ public interface CallbackClientInterface extends Remote {
 	public void mostrarPergunta() throws RemoteException;
 	public void emEspera() throws RemoteException;
 	public void serverOcupado() throws RemoteException;
+
+	public boolean temPergunta() throws RemoteException;
+	public void responder() throws RemoteException;
 }

@@ -8,12 +8,14 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 	private String nome;
 	private int score;
 	private CallbackServerInterface server;
+	private boolean flagPergunta;
 	
 	public CallbackClientImpl(String nome, CallbackServerInterface server) throws RemoteException {
 		this.nome = nome;
 		this.tamanhoSala = 2;
 		this.score = 0;
 		this.server = server;
+		this.flagPergunta = false;
 	}
 		
 	public int getTamanhoSala() {
@@ -56,16 +58,15 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 		for(int i = 0; i < alternativas.length; i++) {
 			System.out.println((i+1) + " " + alternativas[i]);
 		}
-
 		
-		responder();
+		flagPergunta = true;
 	}
 	
 	public void responder() throws RemoteException {
 		System.out.print("Sua resposta: ");
 		Scanner scanner = new Scanner(System.in);
 		int resposta = scanner.nextInt();
-		
+		flagPergunta = false;
 		if(server.verificaResposta(resposta - 1)) {
 			System.out.println("Acertou!");
 		}else{
@@ -79,6 +80,10 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 	
 	public void serverOcupado() {
 		System.out.println("A sala está ocupada no momento!");
+	}
+	
+	public boolean temPergunta() {
+		return flagPergunta;
 	}
 
 }

@@ -17,6 +17,11 @@ public class Main {
 			CallbackServerInterface callbackServerObject = (CallbackServerInterface) Naming.lookup(address);
 			CallbackClientInterface callbackObj = new CallbackClientImpl(nome, callbackServerObject);
 			callbackServerObject.registerForCallback(callbackObj);
+			while(true) {
+				if(callbackObj.temPergunta()) {
+					callbackObj.responder();					
+				}
+			}
 			
 		} catch (Exception e) {
 			System.out.println("Falha no servidor: " + e);
