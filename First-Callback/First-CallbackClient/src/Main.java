@@ -15,7 +15,7 @@ public class Main {
 			String address = "rmi://" + ip + ":" + port + "/" + name;
 			
 			CallbackServerInterface callbackServerObject = (CallbackServerInterface) Naming.lookup(address);
-			CallbackClientInterface callbackObj = new CallbackClientImpl(nome);
+			CallbackClientInterface callbackObj = new CallbackClientImpl(nome, callbackServerObject);
 			callbackServerObject.registerForCallback(callbackObj);
 			
 		} catch (Exception e) {

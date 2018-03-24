@@ -7,11 +7,13 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 	private int tamanhoSala;
 	private String nome;
 	private int score;
+	private CallbackServerInterface server;
 	
-	public CallbackClientImpl(String nome) throws RemoteException {
+	public CallbackClientImpl(String nome, CallbackServerInterface server) throws RemoteException {
 		this.nome = nome;
 		this.tamanhoSala = 2;
 		this.score = 0;
+		this.server = server;
 	}
 		
 	public int getTamanhoSala() {
@@ -46,6 +48,19 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 		System.out.print("Quantos jogadores vão participar (incluindo você)? ");
 		Scanner scanner = new Scanner(System.in);
 		this.tamanhoSala = scanner.nextInt();
+	}
+	
+	public void mostrarPergunta() throws RemoteException {
+		System.out.println(server.getEnunciado());
+		String[] alternativas = server.getAlternativas();
+		for(int i = 0; i < alternativas.length; i++) {
+			System.out.println((i+1) + " " + alternativas[i]);
+		}
+		
+	}
+	
+	public void emEspera() {
+		System.out.println("Esperando os outros jogadores!");
 	}
 
 }

@@ -36,11 +36,23 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 			maxClientes = callbackClientObject.getTamanhoSala();
 			
 			System.out.println("Limite de "+ maxClientes + " jogadores");
+			
+			callbackClientObject.emEspera();
 		}else if (!(clientes.contains(callbackClientObject))) {
 			if(clientes.size() < maxClientes) {
 				clientes.addElement(callbackClientObject);
 				System.out.println("Jogador " + callbackClientObject.getNome() + " adicionado!");
 			}
-		  }
+			if(clientes.size() < maxClientes) {
+				callbackClientObject.emEspera();
+			}
+		}
+		
+		if(clientes.size() == maxClientes) {
+			for(int i = 0; i < clientes.size(); i++) {
+				System.out.println("Jogador " + clientes.elementAt(i).getNome());
+				clientes.elementAt(i).mostrarPergunta();					
+			}
+		}
 	}
 }
