@@ -9,12 +9,14 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 	private Vector<CallbackClientInterface> clientes;
 	private int maxClientes;
 	private Stack<Pergunta> perguntas;
+	private boolean aceitouPergunta; 
 	
 	protected CallbackServerImpl(Stack<Pergunta> perguntas) throws RemoteException {
 		super();
-		clientes = new Vector<CallbackClientInterface>();
-		maxClientes = 2;
+		this.clientes = new Vector<CallbackClientInterface>();
+		this.maxClientes = 2;
 		this.perguntas  = perguntas;
+		this.aceitouPergunta = false;
 	}
 	
 	public String getEnunciado() throws RemoteException{
@@ -37,14 +39,14 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 			
 			System.out.println("Limite de "+ maxClientes + " jogadores");
 			
-			callbackClientObject.emEspera();
+			callbackClientObject.imprimirMensagem("Esperando os outros jogadores!");
 		}else if (!(clientes.contains(callbackClientObject))) {
 			if(clientes.size() < maxClientes) {
 				clientes.addElement(callbackClientObject);
 				System.out.println("Jogador " + callbackClientObject.getNome() + " adicionado!");
 			}
 			if(clientes.size() < maxClientes) {
-				callbackClientObject.emEspera();
+				callbackClientObject.imprimirMensagem("Esperando os outros jogadores!");
 			}
 		}
 		
@@ -55,17 +57,42 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 					clientes.elementAt(i).mostrarPergunta();
 				}
 			}else {
-				callbackClientObject.serverOcupado();
+				callbackClientObject.imprimirMensagem("A sala está ocupada no momento!");
 			}
 		}
 	}
 	
 
-	public boolean verificaResposta(int resposta) {
+	public boolean verificaResposta(int resposta, CallbackClientInterface cliente) throws RemoteException {
+		aceitouPergunta = false;
 		if(this.perguntas.peek().getRespostaCerta() == resposta) {
 			this.perguntas.pop();
+			
+			for(int i = 0; i < clientes.size(); i++) {
+				if(clientes.elementAt(i) != cliente) {
+					clientes.elementAt(i).imprimirMensagem("Jogador " + cliente.getNome() + " acertou!");
+				}
+			}
+			
 			return true;
 		}
+		
+		for(int i = 0; i < clientes.size(); i++) {
+			if(clientes.elementAt(i) != cliente) {
+				clientes.elementAt(i).imprimirMensagem("Jogador " + cliente.getNome() + " errou!");
+			}
+		}
 		return false;
+	}
+	
+	public void aceitarPergunta(CallbackClientInterface cliente) throws RemoteException {
+		if(!aceitouPergunta) {
+			aceitouPergunta = true;
+			for(int i = 0; i < clientes.size(); i++) {
+				clientes.elementAt(i).imprimirMensagem("Jogador " + cliente.getNome() + " aceitou responder!");
+			}
+			cliente.responder();
+		}
+		
 	}
 }

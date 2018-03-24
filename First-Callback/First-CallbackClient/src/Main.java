@@ -19,7 +19,7 @@ public class Main {
 			callbackServerObject.registerForCallback(callbackObj);
 			while(true) {
 				if(callbackObj.temPergunta()) {
-					callbackObj.responder();					
+					callbackObj.aceitaResponder();					
 				}
 			}
 			
