@@ -62,5 +62,9 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 	public void emEspera() {
 		System.out.println("Esperando os outros jogadores!");
 	}
+	
+	public void serverOcupado() {
+		System.out.println("A sala está ocupada no momento!");
+	}
 
 }
