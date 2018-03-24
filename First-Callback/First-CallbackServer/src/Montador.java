@@ -1,11 +1,13 @@
 import java.io.IOException;
 import java.util.Random;
+import java.util.Stack;
 
 public class Montador {
-	private Pergunta[] perguntas = new Pergunta[5];
+	private Stack<Pergunta> perguntas;
 	private Random gerador = new Random();
 	
 	public Montador() throws IOException {
+		perguntas = new Stack<Pergunta>();
 		int[] perguntasLidas = new int[5];
 		for (int i = 0; i < 5; i++) {
 			int index = gerador.nextInt(12);
@@ -23,19 +25,15 @@ public class Montador {
 			sb.append (String.valueOf (index));
 			sb.append (".txt");
 			String path = sb.toString();
-			perguntas[i] = ManipuladorArquivo.leitor(path);
+			perguntas.push(ManipuladorArquivo.leitor(path));
 		}
 	}
 	
-	public Pergunta[] getPerguntas() {
+	public Stack<Pergunta> getPerguntas() {
 		return perguntas;
 	}
 
-	public void setPerguntas(Pergunta[] perguntas) {
+	public void setPerguntas(Stack<Pergunta> perguntas) {
 		this.perguntas = perguntas;
-	}
-	
-	public Pergunta getPergunta(int x) {
-		return perguntas[x];
 	}
 }
