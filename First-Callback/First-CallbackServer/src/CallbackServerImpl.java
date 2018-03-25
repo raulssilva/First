@@ -57,7 +57,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 					clientes.elementAt(i).mostrarPergunta();
 				}
 			}else {
-				callbackClientObject.imprimirMensagem("A sala está ocupada no momento!");
+				callbackClientObject.imprimirMensagem("A sala estï¿½ ocupada no momento!");
 			}
 		}
 	}
@@ -98,7 +98,11 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 			cliente.imprimirMensagem("Jogador " + clienteRespondendo.getNome() + " aceitou responder!");
 		}else {
 			while(count != maxClientes) {
-				System.out.print("a");
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 			count = 0;
 			cliente.responder();

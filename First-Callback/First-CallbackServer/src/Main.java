@@ -18,7 +18,7 @@ public class Main {
 						
 			Naming.rebind(address, servidor);
 			
-			System.out.println("Servidor está pronto.");
+			System.out.println("Servidor estï¿½ pronto.");
 		} catch (Exception e) {
 			System.out.println("Falha no servidor: " + e);
 		}
