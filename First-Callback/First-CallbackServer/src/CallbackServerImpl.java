@@ -10,6 +10,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 	private int maxClientes;
 	private Stack<Pergunta> perguntas;
 	private CallbackClientInterface clienteRespondendo;
+	private int count;
 	
 	protected CallbackServerImpl(Stack<Pergunta> perguntas) throws RemoteException {
 		super();
@@ -17,6 +18,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		this.maxClientes = 2;
 		this.perguntas  = perguntas;
 		this.clienteRespondendo = null;
+		this.count = 0;
 	}
 	
 	public String getEnunciado() throws RemoteException{
@@ -66,7 +68,6 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		if(this.perguntas.peek().getRespostaCerta() == resposta) {
 			this.perguntas.pop();
 			cliente.addScore(1);
-			cliente.imprimirMensagem(cliente.getScore() + "");
 			
 			return true;
 			//notificar os outros jogadores se acertou ou n
@@ -74,24 +75,33 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		for(int i = 0; i < clientes.size(); i++) {
 			if(!clientes.elementAt(i).equals(cliente)) {
 				clientes.elementAt(i).addScore(1);
-				clientes.elementAt(i).imprimirMensagem(clientes.elementAt(i).getScore() + "");
 			}
 		}
+		
+		this.perguntas.pop();
 		
 		return false;
 	}
 	
 	public void aceitarPergunta(CallbackClientInterface cliente) throws RemoteException {
+		count++;
+		if(clienteRespondendo == null) {
+			clienteRespondendo = cliente;
+		}
 		
-			
-			if(clienteRespondendo == null) {
-				clienteRespondendo = cliente;
-			}
-			
-			if(!cliente.equals(clienteRespondendo)) {
-				cliente.imprimirMensagem("Jogador " + clienteRespondendo.getNome() + " aceitou responder!");
-			}else {
-				cliente.responder();
-			}
+		if(!cliente.equals(clienteRespondendo)) {
+			cliente.imprimirMensagem("Jogador " + clienteRespondendo.getNome() + " aceitou responder!");
+		}else {
+			cliente.responder();
+		}
+	}
+	
+
+	public void mostrarPergunta() throws RemoteException {
+		while(count != maxClientes) {}
+		count = 0;
+		for(int i = 0; i < clientes.size(); i++) {
+			clientes.elementAt(i).mostrarPergunta();
+		}
 	}
 }

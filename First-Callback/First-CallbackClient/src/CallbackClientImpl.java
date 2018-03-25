@@ -70,7 +70,8 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 			System.out.println("Acertou! Ganhou um ponto");
 		}else{
 			System.out.println("Errou!");
-		}		
+		}
+		server.mostrarPergunta();
 	}
 	
 	public void aceitaResponder() throws RemoteException {
