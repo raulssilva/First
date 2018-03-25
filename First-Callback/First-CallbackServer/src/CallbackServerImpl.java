@@ -52,12 +52,20 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		}
 		
 		if(clientes.size() == maxClientes ) {
+			try {
+				for(int i = 0; i < clientes.size(); i++) {
+					clientes.elementAt(i).imprimirMensagem("O jogo vai começar. Prepare-se!");
+				}
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			if(clientes.contains(callbackClientObject)){
 				for(int i = 0; i < clientes.size(); i++) {
 					clientes.elementAt(i).mostrarPergunta();
 				}
 			}else {
-				callbackClientObject.imprimirMensagem("A sala est� ocupada no momento!");
+				callbackClientObject.imprimirMensagem("A sala está ocupada no momento!");
 			}
 		}
 	}
@@ -71,12 +79,19 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 			cliente.addScore(1);
 			clienteRespondendo = null;
 			
+			for(int i = 0; i < clientes.size(); i++) {
+				if(!clientes.elementAt(i).equals(cliente)) {
+					clientes.elementAt(i).imprimirMensagem("Jogador " + cliente.getNome() + " acertou!");
+				}
+			}
+			
 			return true;
 			//notificar os outros jogadores se acertou ou n
 		}
 		for(int i = 0; i < clientes.size(); i++) {
 			if(!clientes.elementAt(i).equals(cliente)) {
 				clientes.elementAt(i).addScore(1);
+				clientes.elementAt(i).imprimirMensagem("Jogador " + cliente.getNome() + " errou, você ganhou ponto!");
 			}
 		}
 		
@@ -95,7 +110,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		}
 		
 		if(!cliente.equals(clienteRespondendo)) {
-			cliente.imprimirMensagem("Jogador " + clienteRespondendo.getNome() + " aceitou responder!");
+			cliente.imprimirMensagem("Jogador " + clienteRespondendo.getNome() + " leventou a mão primeiro!");
 		}else {
 			while(count != maxClientes) {
 				try {
@@ -111,14 +126,21 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 	
 
 	public void mostrarPergunta() throws RemoteException {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		if(!perguntas.isEmpty()) {
 			for(int i = 0; i < clientes.size(); i++) {
+				clientes.elementAt(i).imprimirMensagem("");
+				clientes.elementAt(i).imprimirMensagem("------------------------------------------------");
+				clientes.elementAt(i).imprimirMensagem("");
 				clientes.elementAt(i).mostrarPergunta();
 			}
 		}else {
-			for(int i = 0; i < clientes.size(); i++) {
-				pontuacaoMaxima();
-			}
+			pontuacaoMaxima();
 		}
 	}
 	
@@ -131,7 +153,12 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		}
 		
 		for(int i = 0; i < clientes.size(); i++) {
-			clientes.elementAt(i).verificarGanhador(pontuacao_maxima);
+			int pontos = clientes.elementAt(i).getScore();
+			if(pontos < pontuacao_maxima) {
+				clientes.elementAt(i).imprimirMensagem("Sua pontuação foi " + pontos + " pontos. Você perdeu :(");
+			}else {
+				clientes.elementAt(i).imprimirMensagem("Sua pontuação foi " + pontos + " pontos. Você ganhou :D");
+			}
 		}
 	}
 }

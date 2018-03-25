@@ -47,16 +47,17 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 	}
 	
 	public void defineTamanhoSala() {
-		System.out.print("Quantos jogadores vão participar (incluindo você)? ");
+		System.out.print("Quantos jogadores vï¿½o participar (incluindo vocï¿½)? ");
 		Scanner scanner = new Scanner(System.in);
 		this.tamanhoSala = scanner.nextInt();
 	}
 	
 	public void mostrarPergunta() throws RemoteException {
 		System.out.println(server.getEnunciado());
+		System.out.println("");
 		String[] alternativas = server.getAlternativas();
 		for(int i = 0; i < alternativas.length; i++) {
-			System.out.println((i+1) + " " + alternativas[i]);
+			System.out.println((i+1) + ") - " + alternativas[i]);
 		}
 		
 		flagPergunta = true;
@@ -75,11 +76,11 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 	}
 	
 	public void aceitaResponder() throws RemoteException {
-		System.out.print("Aceita responder? (aperte s) ");
+		System.out.print("Aperte ENTER para responder!");
 		Scanner scanner = new Scanner(System.in);
 		String aceita = scanner.nextLine();
 		flagPergunta = false;
-		if(aceita.equalsIgnoreCase("s")) {
+		if(aceita != null) {
 			server.aceitarPergunta(this);
 		}
 	}
@@ -90,14 +91,6 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 	
 	public boolean temPergunta() {
 		return flagPergunta;
-	}
-	
-	public void verificarGanhador(int pontuacao_maxima) {
-		if(this.score == pontuacao_maxima) {
-			System.out.println("Você ganhou! :D");
-		}else {
-			System.out.println("Você perdeu! :(");
-		}
 	}
 
 }

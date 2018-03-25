@@ -9,7 +9,7 @@ public class Main {
 		Montador monta = new Montador();
 		CallbackServerImpl servidor = new CallbackServerImpl(monta.getPerguntas());  
 		try {
-			String ip = "localhost";
+			String ip = "10.9.99.98";
 			int port = 8080;
 			String name = "first";
 			String address = "rmi://" + ip + ":" + port + "/" + name;
@@ -18,7 +18,7 @@ public class Main {
 						
 			Naming.rebind(address, servidor);
 			
-			System.out.println("Servidor est� pronto.");
+			System.out.println("Servidor está pronto.");
 		} catch (Exception e) {
 			System.out.println("Falha no servidor: " + e);
 		}
