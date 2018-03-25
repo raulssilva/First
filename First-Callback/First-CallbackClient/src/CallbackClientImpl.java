@@ -47,7 +47,7 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 	}
 	
 	public void defineTamanhoSala() {
-		System.out.print("Quantos jogadores vï¿½o participar (incluindo vocï¿½)? ");
+		System.out.print("Quantos jogadores vão participar (incluindo você)? ");
 		Scanner scanner = new Scanner(System.in);
 		this.tamanhoSala = scanner.nextInt();
 	}
