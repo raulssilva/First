@@ -66,9 +66,8 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 		System.out.print("Sua resposta: ");
 		Scanner scanner = new Scanner(System.in);
 		int resposta = scanner.nextInt();
-		flagPergunta = false;
 		if(server.verificaResposta(resposta - 1, this)) {
-			System.out.println("Acertou!");
+			System.out.println("Acertou! Ganhou um ponto");
 		}else{
 			System.out.println("Errou!");
 		}		
@@ -78,7 +77,8 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 		System.out.print("Aceita responder? (s/n) ");
 		Scanner scanner = new Scanner(System.in);
 		String aceita = scanner.nextLine();
-		if(aceita.toLowerCase() == "s") {
+		flagPergunta = false;
+		if(aceita.equalsIgnoreCase("s")) {
 			server.aceitarPergunta(this);
 		}
 	}
