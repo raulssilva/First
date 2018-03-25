@@ -91,5 +91,13 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 	public boolean temPergunta() {
 		return flagPergunta;
 	}
+	
+	public void verificarGanhador(int pontuacao_maxima) {
+		if(this.score == pontuacao_maxima) {
+			System.out.println("Você ganhou! :D");
+		}else {
+			System.out.println("Você perdeu! :(");
+		}
+	}
 
 }

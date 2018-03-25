@@ -107,8 +107,27 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 	
 
 	public void mostrarPergunta() throws RemoteException {
+		if(!perguntas.isEmpty()) {
+			for(int i = 0; i < clientes.size(); i++) {
+				clientes.elementAt(i).mostrarPergunta();
+			}
+		}else {
+			for(int i = 0; i < clientes.size(); i++) {
+				pontuacaoMaxima();
+			}
+		}
+	}
+	
+	public void pontuacaoMaxima() throws RemoteException{
+		int pontuacao_maxima = 0; 
 		for(int i = 0; i < clientes.size(); i++) {
-			clientes.elementAt(i).mostrarPergunta();
+			if(pontuacao_maxima < clientes.elementAt(i).getScore()) {
+				pontuacao_maxima = clientes.elementAt(i).getScore();
+			}
+		}
+		
+		for(int i = 0; i < clientes.size(); i++) {
+			clientes.elementAt(i).verificarGanhador(pontuacao_maxima);
 		}
 	}
 }

@@ -9,6 +9,7 @@ public interface CallbackClientInterface extends Remote {
 	public void mostrarPergunta() throws RemoteException;
 	public void imprimirMensagem(String mensagem) throws RemoteException;
 	public void addScore(int score) throws RemoteException;
+	public void verificarGanhador(int pontuacao_maxima) throws RemoteException;
 
 	public boolean temPergunta() throws RemoteException;
 	public void responder() throws RemoteException;
