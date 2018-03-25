@@ -9,7 +9,7 @@ public class Main {
 		String nome = scanner.nextLine(); 
 		
 		try {
-			String ip = "10.9.99.79";
+			String ip = "localhost";
 			int port = 8080;
 			String name = "first";
 			String address = "rmi://" + ip + ":" + port + "/" + name;

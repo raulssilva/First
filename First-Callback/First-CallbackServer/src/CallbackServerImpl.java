@@ -54,7 +54,6 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		if(clientes.size() == maxClientes ) {
 			if(clientes.contains(callbackClientObject)){
 				for(int i = 0; i < clientes.size(); i++) {
-					System.out.println("Jogador " + clientes.elementAt(i).getNome());
 					clientes.elementAt(i).mostrarPergunta();
 				}
 			}else {
@@ -66,7 +65,9 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 
 	public boolean verificaResposta(int resposta, CallbackClientInterface cliente) throws RemoteException {
 		if(this.perguntas.peek().getRespostaCerta() == resposta) {
-			this.perguntas.pop();
+			if(!this.perguntas.empty()) {
+				this.perguntas.pop();
+			}
 			cliente.addScore(1);
 			clienteRespondendo = null;
 			
@@ -79,7 +80,9 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 			}
 		}
 		
-		this.perguntas.pop();
+		if(!this.perguntas.empty()) {
+			this.perguntas.pop();
+		}
 		clienteRespondendo = null;
 		
 		return false;
@@ -94,14 +97,16 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		if(!cliente.equals(clienteRespondendo)) {
 			cliente.imprimirMensagem("Jogador " + clienteRespondendo.getNome() + " aceitou responder!");
 		}else {
+			while(count != maxClientes) {
+				System.out.print("a");
+			}
+			count = 0;
 			cliente.responder();
 		}
 	}
 	
 
 	public void mostrarPergunta() throws RemoteException {
-		while(count != maxClientes) {}
-		count = 0;
 		for(int i = 0; i < clientes.size(); i++) {
 			clientes.elementAt(i).mostrarPergunta();
 		}
