@@ -68,6 +68,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		if(this.perguntas.peek().getRespostaCerta() == resposta) {
 			this.perguntas.pop();
 			cliente.addScore(1);
+			clienteRespondendo = null;
 			
 			return true;
 			//notificar os outros jogadores se acertou ou n
@@ -79,6 +80,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		}
 		
 		this.perguntas.pop();
+		clienteRespondendo = null;
 		
 		return false;
 	}
