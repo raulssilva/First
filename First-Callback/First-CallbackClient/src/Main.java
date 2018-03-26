@@ -3,8 +3,10 @@ import java.util.Scanner;
 
 public class Main {
 
+	private static Scanner scanner;
+
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
+		scanner = new Scanner(System.in);
 		System.out.print("Informe seu nome: ");
 		String nome = scanner.nextLine(); 
 		

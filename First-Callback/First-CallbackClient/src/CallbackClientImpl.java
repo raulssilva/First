@@ -63,8 +63,6 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 		for(int i = 0; i < alternativas.length; i++) {
 			System.out.println((i+1) + ") - " + alternativas[i]);
 		}
-		
-		//flagPergunta = true;
 	}
 	
 	public void responder() throws RemoteException {
@@ -77,7 +75,6 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 			System.out.println("Errou!");
 		}
 		setFlagPergunta(false);
-		//server.mostrarPergunta();
 	}
 	
 	public void aceitaResponder() throws RemoteException {
