@@ -53,14 +53,9 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		}
 		
 		if(clientes.size() == maxClientes ) {
-			try {
 				for(int i = 0; i < clientes.size(); i++) {
 					clientes.elementAt(i).imprimirMensagem("O jogo vai começar. Prepare-se!");
 				}
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 			if(clientes.contains(callbackClientObject)){
 
 //				for(int i = 0; i < clientes.size(); i++) {
@@ -72,22 +67,6 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		}
 	}
 	
-	public void ackMostrarPergunta(CallbackClientInterface cliente) throws RemoteException {
-		countAck++;
-		System.out.println("entrou");
-		while(countAck != maxClientes) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		countAck = 0;
-		for(int i = 0; i < clientes.size(); i++) {
-				clientes.elementAt(i).aceitaResponder();
-		}
-		
-	}
 	
 
 	public boolean verificaResposta(int resposta, CallbackClientInterface cliente) throws RemoteException {
@@ -147,7 +126,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 	public void mostrarPrimeiraPergunta(CallbackClientInterface cliente) throws RemoteException {
 		while(clientes.size() != maxClientes) {
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -162,8 +141,16 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		cliente.setFlagPergunta(true);
 	}
 		
-	public void mostrarPergunta() throws RemoteException {		
-		
+	public void mostrarPergunta(CallbackClientInterface cliente) throws RemoteException {
+		countAck++;
+		while(countAck != maxClientes) {
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		countAck = 0;
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -172,23 +159,19 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		
 		if(!perguntas.isEmpty()) {
 			
-			for(int i = 0; i < clientes.size(); i++) {
-				clientes.elementAt(i).setFlagPergunta(true);
-				clientes.elementAt(i).imprimirMensagem("");
-				clientes.elementAt(i).imprimirMensagem("------------------------------------------------");
-				clientes.elementAt(i).imprimirMensagem("");
-				//clientes.elementAt(i).mostrarPergunta();
-				
-				clientes.elementAt(i).imprimirMensagem(perguntas.peek().getEnunciado());
-				clientes.elementAt(i).imprimirMensagem("1) " + perguntas.peek().getAlternativa(0));
-				clientes.elementAt(i).imprimirMensagem("2) " + perguntas.peek().getAlternativa(1));
-				clientes.elementAt(i).imprimirMensagem("3) " + perguntas.peek().getAlternativa(2));
-				clientes.elementAt(i).imprimirMensagem("4) " + perguntas.peek().getAlternativa(3));
-				
-			}
+			cliente.setFlagPergunta(true);
+			cliente.imprimirMensagem("");
+			cliente.imprimirMensagem("------------------------------------------------");
+			cliente.imprimirMensagem("");
+			//clientes.elementAt(i).mostrarPergunta();
 			
-		}else {
-			pontuacaoMaxima();
+			cliente.imprimirMensagem(perguntas.peek().getEnunciado());
+			cliente.imprimirMensagem("1) " + perguntas.peek().getAlternativa(0));
+			cliente.imprimirMensagem("2) " + perguntas.peek().getAlternativa(1));
+			cliente.imprimirMensagem("3) " + perguntas.peek().getAlternativa(2));
+			cliente.imprimirMensagem("4) " + perguntas.peek().getAlternativa(3));
+
+			
 		}
 	}
 	

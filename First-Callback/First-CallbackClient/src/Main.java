@@ -17,14 +17,15 @@ public class Main {
 			CallbackServerInterface callbackServerObject = (CallbackServerInterface) Naming.lookup(address);
 			CallbackClientInterface callbackObj = new CallbackClientImpl(nome, callbackServerObject);
 			callbackServerObject.registerForCallback(callbackObj);
-			for(int i = 0; i < 5; i++) {
+			callbackServerObject.mostrarPrimeiraPergunta(callbackObj);
+			for(int i = 0; i < 4; i++) {
 				while(callbackObj.temPergunta() == false) {
-					callbackServerObject.mostrarPrimeiraPergunta(callbackObj);
+					callbackServerObject.mostrarPergunta(callbackObj);
+					callbackObj.setFlagPergunta(true);
 				}
 				while(callbackObj.temPergunta() == true) {
-					if(callbackObj.temPergunta()) {
-						callbackObj.aceitaResponder();					
-					}
+					callbackObj.aceitaResponder();
+					callbackObj.setFlagPergunta(false);
 				}
 			}
 			callbackServerObject.pontuacaoMaxima();
