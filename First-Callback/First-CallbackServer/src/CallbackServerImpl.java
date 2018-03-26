@@ -150,7 +150,6 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 				e.printStackTrace();
 			}
 		}
-		countAck = 0;
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -159,7 +158,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		
 		if(!perguntas.isEmpty()) {
 			
-			cliente.setFlagPergunta(true);
+			//cliente.setFlagPergunta(true);
 			cliente.imprimirMensagem("");
 			cliente.imprimirMensagem("------------------------------------------------");
 			cliente.imprimirMensagem("");
@@ -172,10 +171,14 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 			cliente.imprimirMensagem("4) " + perguntas.peek().getAlternativa(3));
 
 			
+		}else {
+			pontuacaoMaxima(cliente);
 		}
+		
+		countAck = 0;
 	}
 	
-	public void pontuacaoMaxima() throws RemoteException{
+	public void pontuacaoMaxima(CallbackClientInterface cliente) throws RemoteException{
 		int pontuacao_maxima = 0; 
 		for(int i = 0; i < clientes.size(); i++) {
 			if(pontuacao_maxima < clientes.elementAt(i).getScore()) {
@@ -183,13 +186,11 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 			}
 		}
 		
-		for(int i = 0; i < clientes.size(); i++) {
-			int pontos = clientes.elementAt(i).getScore();
-			if(pontos < pontuacao_maxima) {
-				clientes.elementAt(i).imprimirMensagem("Sua pontuação foi " + pontos + " pontos. Você perdeu :(");
-			}else {
-				clientes.elementAt(i).imprimirMensagem("Sua pontuação foi " + pontos + " pontos. Você ganhou :D");
-			}
+		int pontos = cliente.getScore();
+		if(pontos < pontuacao_maxima) {
+			cliente.imprimirMensagem("Sua pontuação foi " + pontos + " pontos. Você perdeu :(");
+		}else {
+			cliente.imprimirMensagem("Sua pontuação foi " + pontos + " pontos. Você ganhou :D");
 		}
 	}
 }

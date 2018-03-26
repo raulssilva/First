@@ -8,7 +8,7 @@ public interface CallbackServerInterface extends Remote {
 	public void aceitarPergunta(CallbackClientInterface cliente) throws RemoteException;
 	public void mostrarPrimeiraPergunta(CallbackClientInterface cliente) throws RemoteException;
 	public void mostrarPergunta(CallbackClientInterface cliente) throws RemoteException;
-	public void pontuacaoMaxima() throws RemoteException;
+	public void pontuacaoMaxima(CallbackClientInterface cliente) throws RemoteException;
 	
 	public void registerForCallback(CallbackClientInterface callbackClientObject) throws RemoteException;
 }
