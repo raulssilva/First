@@ -3,15 +3,13 @@ import java.util.Scanner;
 
 public class Main {
 
-	private static Scanner s;
-
 	public static void main(String[] args) {
-		s = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 		System.out.print("Informe seu nome: ");
-		String nome = s.nextLine(); 
+		String nome = scanner.nextLine(); 
 		
 		try {
-			String ip = "localhost";
+			String ip = "10.9.99.98";
 			int port = 8080;
 			String name = "first";
 			String address = "rmi://" + ip + ":" + port + "/" + name;

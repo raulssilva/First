@@ -9,7 +9,6 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 	private int score;
 	private CallbackServerInterface server;
 	private boolean flagPergunta;
-	private Scanner scanner;
 	
 	public CallbackClientImpl(String nome, CallbackServerInterface server) throws RemoteException {
 		this.nome = nome;
@@ -53,7 +52,7 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 	
 	public void defineTamanhoSala() {
 		System.out.print("Quantos jogadores vão participar (incluindo você)? ");
-		scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 		this.tamanhoSala = scanner.nextInt();
 	}
 	
@@ -64,11 +63,13 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 		for(int i = 0; i < alternativas.length; i++) {
 			System.out.println((i+1) + ") - " + alternativas[i]);
 		}
+		
+		//flagPergunta = true;
 	}
 	
 	public void responder() throws RemoteException {
 		System.out.print("Sua resposta: ");
-		scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 		int resposta = scanner.nextInt();
 		if(server.verificaResposta(resposta - 1, this)) {
 			System.out.println("Acertou! Ganhou um ponto");
@@ -76,11 +77,12 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 			System.out.println("Errou!");
 		}
 		setFlagPergunta(false);
+		//server.mostrarPergunta();
 	}
 	
 	public void aceitaResponder() throws RemoteException {
 		System.out.print("Aperte ENTER para responder!");
-		scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 		String aceita = scanner.nextLine();
 		if(aceita != null) {
 			server.aceitarPergunta(this);
