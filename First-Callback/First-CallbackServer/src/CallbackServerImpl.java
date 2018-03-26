@@ -129,9 +129,10 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		}
 		
 		if(!cliente.equals(clienteRespondendo)) {
-			//cliente.setFlagPergunta(false);
+			cliente.setFlagPergunta(false);
 			cliente.imprimirMensagem("Jogador " + clienteRespondendo.getNome() + " leventou a mão primeiro!");
 		}else {
+			cliente.setFlagPergunta(false);
 			while(count != maxClientes) {
 				try {
 					Thread.sleep(1000);
