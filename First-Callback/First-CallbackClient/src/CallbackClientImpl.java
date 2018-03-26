@@ -76,15 +76,13 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 		}else{
 			System.out.println("Errou!");
 		}
-		server.mostrarPergunta();
+		//server.mostrarPergunta();
 	}
 	
 	public void aceitaResponder() throws RemoteException {
-		flagPergunta = true;
 		System.out.print("Aperte ENTER para responder!");
 		Scanner scanner = new Scanner(System.in);
 		String aceita = scanner.nextLine();
-		//flagPergunta = false;
 		if(aceita != null) {
 			server.aceitarPergunta(this);
 		}

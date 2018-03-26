@@ -172,15 +172,22 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		}
 		
 		if(!perguntas.isEmpty()) {
+			
 			for(int i = 0; i < clientes.size(); i++) {
 				clientes.elementAt(i).setFlagPergunta(true);
-			}
-			for(int i = 0; i < clientes.size(); i++) {
 				clientes.elementAt(i).imprimirMensagem("");
 				clientes.elementAt(i).imprimirMensagem("------------------------------------------------");
 				clientes.elementAt(i).imprimirMensagem("");
-				clientes.elementAt(i).mostrarPergunta();
+				//clientes.elementAt(i).mostrarPergunta();
+				
+				clientes.elementAt(i).imprimirMensagem(perguntas.peek().getEnunciado());
+				clientes.elementAt(i).imprimirMensagem("1) " + perguntas.peek().getAlternativa(0));
+				clientes.elementAt(i).imprimirMensagem("2) " + perguntas.peek().getAlternativa(1));
+				clientes.elementAt(i).imprimirMensagem("3) " + perguntas.peek().getAlternativa(2));
+				clientes.elementAt(i).imprimirMensagem("4) " + perguntas.peek().getAlternativa(3));
+				
 			}
+			
 		}else {
 			pontuacaoMaxima();
 		}

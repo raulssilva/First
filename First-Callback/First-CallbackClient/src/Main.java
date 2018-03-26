@@ -18,6 +18,10 @@ public class Main {
 			CallbackClientInterface callbackObj = new CallbackClientImpl(nome, callbackServerObject);
 			callbackServerObject.registerForCallback(callbackObj);
 			callbackServerObject.mostrarPrimeiraPergunta(callbackObj);
+			callbackServerObject.mostrarPrimeiraPergunta(callbackObj);
+			callbackServerObject.mostrarPrimeiraPergunta(callbackObj);
+			callbackServerObject.mostrarPrimeiraPergunta(callbackObj);
+			callbackServerObject.mostrarPrimeiraPergunta(callbackObj);
 			while(true) {
 				if(callbackObj.temPergunta()) {
 					callbackObj.aceitaResponder();					
