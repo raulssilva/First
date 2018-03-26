@@ -28,7 +28,7 @@ public class Main {
 					callbackObj.setFlagPergunta(false);
 				}
 			}
-			callbackServerObject.pontuacaoMaxima();
+			callbackServerObject.pontuacaoMaxima(callbackObj);
 			
 		} catch (Exception e) {
 			System.out.println("Falha no servidor: " + e);

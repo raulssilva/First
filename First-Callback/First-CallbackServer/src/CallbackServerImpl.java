@@ -12,6 +12,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 	private CallbackClientInterface clienteRespondendo;
 	private int count;
 	private int countAck = 0;
+	private int countResultado = 0;
 	
 	protected CallbackServerImpl(Stack<Pergunta> perguntas) throws RemoteException {
 		super();
@@ -158,11 +159,9 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		
 		if(!perguntas.isEmpty()) {
 			
-			//cliente.setFlagPergunta(true);
 			cliente.imprimirMensagem("");
 			cliente.imprimirMensagem("------------------------------------------------");
 			cliente.imprimirMensagem("");
-			//clientes.elementAt(i).mostrarPergunta();
 			
 			cliente.imprimirMensagem(perguntas.peek().getEnunciado());
 			cliente.imprimirMensagem("1) " + perguntas.peek().getAlternativa(0));
@@ -172,6 +171,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 
 			
 		}else {
+			System.out.println("oi");
 			pontuacaoMaxima(cliente);
 		}
 		
@@ -179,12 +179,22 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 	}
 	
 	public void pontuacaoMaxima(CallbackClientInterface cliente) throws RemoteException{
+		countResultado++;
+		while(countResultado != maxClientes) {
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 		int pontuacao_maxima = 0; 
 		for(int i = 0; i < clientes.size(); i++) {
 			if(pontuacao_maxima < clientes.elementAt(i).getScore()) {
 				pontuacao_maxima = clientes.elementAt(i).getScore();
 			}
 		}
+		
+		//countResultado=0;
 		
 		int pontos = cliente.getScore();
 		if(pontos < pontuacao_maxima) {
