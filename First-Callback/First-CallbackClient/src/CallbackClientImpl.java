@@ -25,6 +25,10 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 	public void setTamanhoSala(int tamanhoSala) {
 		this.tamanhoSala = tamanhoSala;
 	}
+	
+	public void setFlagPergunta(boolean temPerguta) {
+		this.flagPergunta = temPerguta;
+	}
 
 	public String getNome() {
 		return nome;

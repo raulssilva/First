@@ -11,6 +11,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 	private Stack<Pergunta> perguntas;
 	private CallbackClientInterface clienteRespondendo;
 	private int count;
+	private int countAck = 0;
 	
 	protected CallbackServerImpl(Stack<Pergunta> perguntas) throws RemoteException {
 		super();
@@ -62,12 +63,38 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 			}
 			if(clientes.contains(callbackClientObject)){
 				for(int i = 0; i < clientes.size(); i++) {
-					clientes.elementAt(i).mostrarPergunta();
+					clientes.elementAt(i).imprimirMensagem(perguntas.peek().getEnunciado());
+					clientes.elementAt(i).imprimirMensagem("1) " + perguntas.peek().getAlternativa(0));
+					clientes.elementAt(i).imprimirMensagem("2) " + perguntas.peek().getAlternativa(1));
+					clientes.elementAt(i).imprimirMensagem("3) " + perguntas.peek().getAlternativa(2));
+					clientes.elementAt(i).imprimirMensagem("4) " + perguntas.peek().getAlternativa(3));
+					
+					clientes.elementAt(i).setFlagPergunta(true);
 				}
+//				for(int i = 0; i < clientes.size(); i++) {
+//					clientes.elementAt(i).aceitaResponder();
+//				}
 			}else {
 				callbackClientObject.imprimirMensagem("A sala está ocupada no momento!");
 			}
 		}
+	}
+	
+	public void ackMostrarPergunta(CallbackClientInterface cliente) throws RemoteException {
+		countAck++;
+		System.out.println("entrou");
+		while(countAck != maxClientes) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		countAck = 0;
+		for(int i = 0; i < clientes.size(); i++) {
+				clientes.elementAt(i).aceitaResponder();
+		}
+		
 	}
 	
 

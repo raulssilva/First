@@ -7,6 +7,7 @@ public interface CallbackServerInterface extends Remote {
 	public boolean verificaResposta(int resposta, CallbackClientInterface cliente) throws RemoteException;
 	public void aceitarPergunta(CallbackClientInterface cliente) throws RemoteException;
 	public void mostrarPergunta() throws RemoteException;
+	public void ackMostrarPergunta(CallbackClientInterface cliente) throws RemoteException;
 	
 	public void registerForCallback(CallbackClientInterface callbackClientObject) throws RemoteException;
 }

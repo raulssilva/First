@@ -10,4 +10,6 @@ public interface CallbackClientInterface extends Remote {
 	public void imprimirMensagem(String mensagem) throws RemoteException;
 	public void responder() throws RemoteException;
 	public void addScore(int score) throws RemoteException;
+	public void aceitaResponder() throws RemoteException;
+	public void setFlagPergunta(boolean temPerguta) throws RemoteException;
 }
