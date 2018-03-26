@@ -57,12 +57,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 				for(int i = 0; i < clientes.size(); i++) {
 					clientes.elementAt(i).imprimirMensagem("O jogo vai começar. Prepare-se!");
 				}
-			if(clientes.contains(callbackClientObject)){
-
-//				for(int i = 0; i < clientes.size(); i++) {
-//					clientes.elementAt(i).aceitaResponder();
-//				}
-			}else {
+			if(!clientes.contains(callbackClientObject)){
 				callbackClientObject.imprimirMensagem("A sala está ocupada no momento!");
 			}
 		}
@@ -85,7 +80,6 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 			}
 			
 			return true;
-			//notificar os outros jogadores se acertou ou n
 		}
 		for(int i = 0; i < clientes.size(); i++) {
 			if(!clientes.elementAt(i).equals(cliente)) {
@@ -193,8 +187,6 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 				pontuacao_maxima = clientes.elementAt(i).getScore();
 			}
 		}
-		
-		//countResultado=0;
 		
 		int pontos = cliente.getScore();
 		if(pontos < pontuacao_maxima) {
