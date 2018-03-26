@@ -62,15 +62,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 				e.printStackTrace();
 			}
 			if(clientes.contains(callbackClientObject)){
-				for(int i = 0; i < clientes.size(); i++) {
-					clientes.elementAt(i).imprimirMensagem(perguntas.peek().getEnunciado());
-					clientes.elementAt(i).imprimirMensagem("1) " + perguntas.peek().getAlternativa(0));
-					clientes.elementAt(i).imprimirMensagem("2) " + perguntas.peek().getAlternativa(1));
-					clientes.elementAt(i).imprimirMensagem("3) " + perguntas.peek().getAlternativa(2));
-					clientes.elementAt(i).imprimirMensagem("4) " + perguntas.peek().getAlternativa(3));
-					
-					clientes.elementAt(i).setFlagPergunta(true);
-				}
+
 //				for(int i = 0; i < clientes.size(); i++) {
 //					clientes.elementAt(i).aceitaResponder();
 //				}
@@ -152,23 +144,42 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 	}
 	
 
-	public void mostrarPergunta() throws RemoteException {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+	public void mostrarPergunta(CallbackClientInterface cliente) throws RemoteException {
+		while(clientes.size() != maxClientes) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 		
-		if(!perguntas.isEmpty()) {
-			for(int i = 0; i < clientes.size(); i++) {
-				clientes.elementAt(i).imprimirMensagem("");
-				clientes.elementAt(i).imprimirMensagem("------------------------------------------------");
-				clientes.elementAt(i).imprimirMensagem("");
-				clientes.elementAt(i).mostrarPergunta();
-			}
-		}else {
-			pontuacaoMaxima();
-		}
+		cliente.imprimirMensagem(perguntas.peek().getEnunciado());
+		cliente.imprimirMensagem("1) " + perguntas.peek().getAlternativa(0));
+		cliente.imprimirMensagem("2) " + perguntas.peek().getAlternativa(1));
+		cliente.imprimirMensagem("3) " + perguntas.peek().getAlternativa(2));
+		cliente.imprimirMensagem("4) " + perguntas.peek().getAlternativa(3));
+		
+		cliente.setFlagPergunta(true);
+		
+		
+		
+		
+//		try {
+//			Thread.sleep(2000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		if(!perguntas.isEmpty()) {
+//			for(int i = 0; i < clientes.size(); i++) {
+//				clientes.elementAt(i).imprimirMensagem("");
+//				clientes.elementAt(i).imprimirMensagem("------------------------------------------------");
+//				clientes.elementAt(i).imprimirMensagem("");
+//				clientes.elementAt(i).mostrarPergunta();
+//			}
+//		}else {
+//			pontuacaoMaxima();
+//		}
 	}
 	
 	public void pontuacaoMaxima() throws RemoteException{

@@ -64,7 +64,7 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 			System.out.println((i+1) + ") - " + alternativas[i]);
 		}
 		
-		flagPergunta = true;
+		//flagPergunta = true;
 	}
 	
 	public void responder() throws RemoteException {
@@ -76,10 +76,11 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 		}else{
 			System.out.println("Errou!");
 		}
-		server.mostrarPergunta();
+		server.mostrarPergunta(this);
 	}
 	
 	public void aceitaResponder() throws RemoteException {
+		flagPergunta = true;
 		System.out.print("Aperte ENTER para responder!");
 		Scanner scanner = new Scanner(System.in);
 		String aceita = scanner.nextLine();

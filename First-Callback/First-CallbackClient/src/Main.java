@@ -17,6 +17,7 @@ public class Main {
 			CallbackServerInterface callbackServerObject = (CallbackServerInterface) Naming.lookup(address);
 			CallbackClientInterface callbackObj = new CallbackClientImpl(nome, callbackServerObject);
 			callbackServerObject.registerForCallback(callbackObj);
+			callbackServerObject.mostrarPergunta(callbackObj);
 			while(true) {
 				if(callbackObj.temPergunta()) {
 					callbackObj.aceitaResponder();					
