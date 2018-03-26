@@ -129,6 +129,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		}
 		
 		if(!cliente.equals(clienteRespondendo)) {
+			cliente.setFlagPergunta(false);
 			cliente.imprimirMensagem("Jogador " + clienteRespondendo.getNome() + " leventou a mão primeiro!");
 		}else {
 			while(count != maxClientes) {
@@ -144,7 +145,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 	}
 	
 
-	public void mostrarPergunta(CallbackClientInterface cliente) throws RemoteException {
+	public void mostrarPrimeiraPergunta(CallbackClientInterface cliente) throws RemoteException {
 		while(clientes.size() != maxClientes) {
 			try {
 				Thread.sleep(1000);
@@ -160,26 +161,26 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		cliente.imprimirMensagem("4) " + perguntas.peek().getAlternativa(3));
 		
 		cliente.setFlagPergunta(true);
+	}
 		
+	public void mostrarPergunta() throws RemoteException {		
 		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
-		
-//		try {
-//			Thread.sleep(2000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		if(!perguntas.isEmpty()) {
-//			for(int i = 0; i < clientes.size(); i++) {
-//				clientes.elementAt(i).imprimirMensagem("");
-//				clientes.elementAt(i).imprimirMensagem("------------------------------------------------");
-//				clientes.elementAt(i).imprimirMensagem("");
-//				clientes.elementAt(i).mostrarPergunta();
-//			}
-//		}else {
-//			pontuacaoMaxima();
-//		}
+		if(!perguntas.isEmpty()) {
+			for(int i = 0; i < clientes.size(); i++) {
+				clientes.elementAt(i).imprimirMensagem("");
+				clientes.elementAt(i).imprimirMensagem("------------------------------------------------");
+				clientes.elementAt(i).imprimirMensagem("");
+				clientes.elementAt(i).mostrarPergunta();
+			}
+		}else {
+			pontuacaoMaxima();
+		}
 	}
 	
 	public void pontuacaoMaxima() throws RemoteException{
