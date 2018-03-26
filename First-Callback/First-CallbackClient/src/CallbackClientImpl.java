@@ -76,6 +76,7 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 		}else{
 			System.out.println("Errou!");
 		}
+		setFlagPergunta(false);
 		//server.mostrarPergunta();
 	}
 	
