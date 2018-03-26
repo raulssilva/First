@@ -83,7 +83,7 @@ public class CallbackClientImpl extends UnicastRemoteObject implements CallbackC
 		System.out.print("Aperte ENTER para responder!");
 		Scanner scanner = new Scanner(System.in);
 		String aceita = scanner.nextLine();
-		flagPergunta = false;
+		//flagPergunta = false;
 		if(aceita != null) {
 			server.aceitarPergunta(this);
 		}
