@@ -173,6 +173,9 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		
 		if(!perguntas.isEmpty()) {
 			for(int i = 0; i < clientes.size(); i++) {
+				clientes.elementAt(i).setFlagPergunta(true);
+			}
+			for(int i = 0; i < clientes.size(); i++) {
 				clientes.elementAt(i).imprimirMensagem("");
 				clientes.elementAt(i).imprimirMensagem("------------------------------------------------");
 				clientes.elementAt(i).imprimirMensagem("");
