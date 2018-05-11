@@ -55,7 +55,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		
 		if(clientes.size() == maxClientes ) {
 				for(int i = 0; i < clientes.size(); i++) {
-					clientes.elementAt(i).imprimirMensagem("O jogo vai começar. Prepare-se!");
+					clientes.elementAt(i).imprimirMensagem("O jogo vai comeï¿½ar. Prepare-se!");
 				}
 			if(clientes.contains(callbackClientObject)){
 
@@ -63,7 +63,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 //					clientes.elementAt(i).aceitaResponder();
 //				}
 			}else {
-				callbackClientObject.imprimirMensagem("A sala está ocupada no momento!");
+				callbackClientObject.imprimirMensagem("A sala estï¿½ ocupada no momento!");
 			}
 		}
 	}
@@ -90,7 +90,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		for(int i = 0; i < clientes.size(); i++) {
 			if(!clientes.elementAt(i).equals(cliente)) {
 				clientes.elementAt(i).addScore(1);
-				clientes.elementAt(i).imprimirMensagem("Jogador " + cliente.getNome() + " errou, você ganhou ponto!");
+				clientes.elementAt(i).imprimirMensagem("Jogador " + cliente.getNome() + " errou, vocï¿½ ganhou ponto!");
 			}
 		}
 		
@@ -109,7 +109,7 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		}
 		
 		if(!cliente.equals(clienteRespondendo)) {
-			cliente.imprimirMensagem("Jogador " + clienteRespondendo.getNome() + " leventou a mão primeiro!");
+			cliente.imprimirMensagem("Jogador " + clienteRespondendo.getNome() + " leventou a mï¿½o primeiro!");
 		}else {
 			while(count != maxClientes) {
 				try {
@@ -198,9 +198,9 @@ public class CallbackServerImpl extends UnicastRemoteObject implements CallbackS
 		
 		int pontos = cliente.getScore();
 		if(pontos < pontuacao_maxima) {
-			cliente.imprimirMensagem("Sua pontuação foi " + pontos + " pontos. Você perdeu :(");
+			cliente.imprimirMensagem("Sua pontuaï¿½ï¿½o foi " + pontos + " pontos. Vocï¿½ perdeu :(");
 		}else {
-			cliente.imprimirMensagem("Sua pontuação foi " + pontos + " pontos. Você ganhou :D");
+			cliente.imprimirMensagem("Sua pontuaï¿½ï¿½o foi " + pontos + " pontos. Vocï¿½ ganhou :D");
 		}
 	}
 }

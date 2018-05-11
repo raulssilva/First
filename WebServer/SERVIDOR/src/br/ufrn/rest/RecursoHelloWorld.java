@@ -1,4 +1,4 @@
-package test;
+package br.ufrn.rest;
 
 import javax.ws.rs.PathParam;
 import javax.ws.rs.GET; 
