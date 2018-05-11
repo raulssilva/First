@@ -14,15 +14,16 @@ public class Main {
 	public static int qtdJogadores = 2;
 	public static int countMostrarPrimeiraPergunta = 0;
 	public static Vector<Jogador> jogadores = new Vector<Jogador>();
-	private static Stack<Pergunta> perguntas;
+	public static Stack<Pergunta> perguntas;
 	
 	@GET
 	@Path("/start/")
 	public String start() throws IOException {
-		Montador m = new Montador();
-		System.out.println(m.getPerguntas().size());
-		//this.perguntas = m.getPerguntas();
-		return "FOI";
+		if(jogadores.size() == 0) {
+			Montador m = new Montador();
+			this.perguntas = m.getPerguntas();
+		}
+		return "";
 	}
 	
 	
@@ -66,16 +67,15 @@ public class Main {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("tamanho ");
-		System.out.println("tamanho " + this.perguntas.size());
-//		String perguntaM = perguntas.peek().getEnunciado()
-//		+ "\n" + 
-//		"1) " + perguntas.peek().getAlternativa(0) + "\n" + 
-//		"2) " + perguntas.peek().getAlternativa(1) + "\n" + 
-//		"3) " + perguntas.peek().getAlternativa(2) + "\n" + 
-//		"4) " + perguntas.peek().getAlternativa(3);
+
+		String perguntaM = this.perguntas.peek().getEnunciado()
+		+ "\n" + 
+		"1) " + perguntas.peek().getAlternativa(0) + "\n" + 
+		"2) " + perguntas.peek().getAlternativa(1) + "\n" + 
+		"3) " + perguntas.peek().getAlternativa(2) + "\n" + 
+		"4) " + perguntas.peek().getAlternativa(3);
 		
-		return "Tolete";
+		return perguntaM;
 	}
 	
 
