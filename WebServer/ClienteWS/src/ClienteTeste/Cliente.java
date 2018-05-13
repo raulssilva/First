@@ -19,7 +19,7 @@ public class Cliente {
 		
 		webResource = client.resource("http://localhost:8080/WebServer/First/init/"+nome);
 		
-		 saida = webResource.get(String.class);
+		saida = webResource.get(String.class);
 		System.out.println(saida);
 		
 		if(saida.equals("Defina a quantidade de jogadores")) {
@@ -27,13 +27,26 @@ public class Cliente {
 			webResource = client.resource("http://localhost:8080/WebServer/First/definirQtd/"+qtdJogadores);
 			saida = webResource.get(String.class);
 			System.out.println(saida);
+			scanner.nextLine();
 		}
 		
-		 webResource = client.resource("http://localhost:8080/WebServer/First/mostrarPrimeiraPergunta/");
-		 saida = webResource.get(String.class);
-		 System.out.println(saida);
-
+		webResource = client.resource("http://localhost:8080/WebServer/First/mostrarPergunta/");
+		saida = webResource.get(String.class);
+		System.out.println(saida);
 		
+		String aceitarResposta = scanner.nextLine();
+		if(aceitarResposta != null){
+			webResource = client.resource("http://localhost:8080/WebServer/First/aceitarResponder/"+nome);
+			saida = webResource.get(String.class);
+			System.out.println(saida);
+		}
+		
+		if(saida.equals("Qual a sua resposta? ")){
+			int resposta = scanner.nextInt();
+			webResource = client.resource("http://localhost:8080/WebServer/First/responder?nome=" + nome + "&resposta=" + resposta);
+			saida = webResource.get(String.class);
+			System.out.println(saida);
+		}
 	} 
 
 }

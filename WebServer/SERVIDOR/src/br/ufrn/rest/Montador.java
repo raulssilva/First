@@ -22,7 +22,8 @@ public class Montador {
 				}
 			}
 			perguntasLidas[i] = index;	
-			StringBuilder sb = new StringBuilder ("/home/petcc07/Documentos/Deba/First/WebServer/SERVIDOR/Perguntas/pergunta");
+			StringBuilder sb = new StringBuilder ("/Users/raulsilveirasilva/Documents/UFRN/Programação Distribuída/First/WebServer/SERVIDOR/Perguntas/pergunta");
+//			StringBuilder sb = new StringBuilder ("/home/petcc07/Documentos/Deba/First/WebServer/SERVIDOR/Perguntas/pergunta");
 			sb.append (String.valueOf (index));
 			sb.append (".txt");
 			String path = sb.toString();
