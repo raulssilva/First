@@ -25,5 +25,9 @@ public class Jogador {
 	public void setPontuacao(int pontuacao) {
 		this.pontuacao = pontuacao;
 	}
+	
+	public void addPontuacao(int pontuacao) {
+		this.pontuacao += pontuacao;
+	}
 
 }

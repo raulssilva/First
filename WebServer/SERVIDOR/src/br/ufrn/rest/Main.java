@@ -66,18 +66,27 @@ public class Main {
 		countMostrarPergunta++;
 		while(countMostrarPergunta != qtdJogadores) {
 			try {
-				Thread.sleep(1);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
-		String perguntaM = this.perguntas.peek().getEnunciado()
+		String perguntaM = perguntas.peek().getEnunciado()
 		+ "\n" + 
 		"1) " + perguntas.peek().getAlternativa(0) + "\n" + 
 		"2) " + perguntas.peek().getAlternativa(1) + "\n" + 
 		"3) " + perguntas.peek().getAlternativa(2) + "\n" + 
 		"4) " + perguntas.peek().getAlternativa(3);
+		
+		countMostrarPergunta = 0;
+		flagResponder = false;
 		
 		return perguntaM;
 	}
@@ -101,10 +110,55 @@ public class Main {
 	@GET
 	@Path("/responder")
 	public String responder(@QueryParam("nome") String nome, @QueryParam("resposta") int resposta) {
-		if(this.perguntas.peek().getRespostaCerta() == resposta-1) {
+		if(this.perguntas.pop().getRespostaCerta() == resposta-1) {
+			for(int i=0; i < jogadores.size(); i++) {
+				if(jogadores.elementAt(i).getNome().equals(nome)) {
+					jogadores.elementAt(i).addPontuacao(1);
+					break;
+				}
+			}
 			return "Resposta certa!";
 		}else {
+			for(int i=0; i < jogadores.size(); i++) {
+				if(!jogadores.elementAt(i).getNome().equals(nome)) {
+					jogadores.elementAt(i).addPontuacao(1);
+				}
+			}
 			return "Resposta errada!";
+		}
+	}
+	
+	@GET
+	@Path("/resultado")
+	public String resultado(@QueryParam("nome") String nome) {
+			
+		countMostrarPergunta++;
+		while(countMostrarPergunta != qtdJogadores) {
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		int pontuacao_maxima = 0; 
+		for(int i = 0; i < jogadores.size(); i++) {
+			if(pontuacao_maxima < jogadores.elementAt(i).getPontuacao()) {
+				pontuacao_maxima = jogadores.elementAt(i).getPontuacao();
+			}
+		}
+		
+		int pontos = 0;
+		
+		for(int i=0; i < jogadores.size(); i++) {
+			if(jogadores.elementAt(i).getNome().equals(nome)) {
+				pontos = jogadores.elementAt(i).getPontuacao();
+				break;
+			}
+		}
+		if(pontos < pontuacao_maxima) {
+			return "Sua pontuação foi " + pontos + " ponto(s). Você perdeu :(";
+		}else {
+			return "Sua pontuação foi " + pontos + " ponto(s). Você ganhou :D";
 		}
 	}
 
