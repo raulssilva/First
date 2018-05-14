@@ -73,7 +73,7 @@ public class Main {
 		}
 		
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -156,9 +156,9 @@ public class Main {
 			}
 		}
 		if(pontos < pontuacao_maxima) {
-			return "Sua pontuação foi " + pontos + " ponto(s). Você perdeu :(";
+			return "Sua pontuaÃ§Ã£o foi " + pontos + " ponto(s). VocÃª perdeu :(";
 		}else {
-			return "Sua pontuação foi " + pontos + " ponto(s). Você ganhou :D";
+			return "Sua pontuaÃ§Ã£o foi " + pontos + " ponto(s). VoÃª ganhou :D";
 		}
 	}
 

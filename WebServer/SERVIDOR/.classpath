@@ -9,11 +9,8 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/jgueiros/Documents/UFRN/9 SEMESTRE/Distribuida/First/WebServer/SERVIDOR/WebContent/WEB-INF/lib/asm-3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/jgueiros/Documents/UFRN/9 SEMESTRE/Distribuida/First/WebServer/SERVIDOR/WebContent/WEB-INF/lib/jersey-core-1.8.jar"/>
-	<classpathentry kind="lib" path="C:/Users/jgueiros/Documents/UFRN/9 SEMESTRE/Distribuida/First/WebServer/SERVIDOR/WebContent/WEB-INF/lib/jersey-server-1.8.jar"/>
-	<classpathentry kind="lib" path="C:/Users/jgueiros/Documents/UFRN/9 SEMESTRE/Distribuida/First/WebServer/ClienteWS/jersey-client-1.8-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/jgueiros/Documents/UFRN/9 SEMESTRE/Distribuida/First/WebServer/ClienteWS/jersey-client-1.8-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/jgueiros/Documents/UFRN/9 SEMESTRE/Distribuida/First/WebServer/ClienteWS/jersey-client-1.8.jar"/>
+	<classpathentry kind="lib" path="/Users/raulsilveirasilva/Documents/UFRN/Programação Distribuída/First/WebServer/SERVIDOR/WebContent/WEB-INF/lib/asm-3.1.jar"/>
+	<classpathentry kind="lib" path="/Users/raulsilveirasilva/Documents/UFRN/Programação Distribuída/First/WebServer/SERVIDOR/WebContent/WEB-INF/lib/jersey-core-1.8.jar"/>
+	<classpathentry kind="lib" path="/Users/raulsilveirasilva/Documents/UFRN/Programação Distribuída/First/WebServer/SERVIDOR/WebContent/WEB-INF/lib/jersey-server-1.8.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
